@@ -1,0 +1,32 @@
+{
+  "name": "manager-api-image",
+  "version": "1.0.0",
+  "description": "Instantiation of manager-api along with its respective build and deploy scripts reside here",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "mocha --timeout 5000 tests/*_test.js --exit",
+    "check_lint": "./node_modules/.bin/eslint ./.eslintrc.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anmolbabu/manager-api-image.git"
+  },
+  "keywords": [],
+  "author": "Anmol Babu <anmolbudugutta@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anmolbabu/manager-api-image/issues"
+  },
+  "homepage": "https://github.com/anmolbabu/manager-api-image#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "hypothesis-core-image": "github:fabric8-hdd/hypothesis-core-image",
+    "manager-api": "github:fabric8-hdd/manager-api"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^5.0.0"
+  }
+}
