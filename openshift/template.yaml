@@ -1,59 +1,45 @@
 apiVersion: v1
 kind: Template
 labels:
-  template: hdd-manager-api
+  template: osio-hdd-manager-api
 metadata:
-  name: hdd-manager-api
+  name: osio-hdd-manager-api
   annotations:
-    description: hdd-supervisor-manager-api
+    description: ${APP_NAME}
 objects:
-- apiVersion: v1
-  kind: Service
-  metadata:
-    labels:
-      app: hdd-supervisor
-    name: hdd-manager-api
-    namespace: hdd-supervisor
-  spec:
-    ports:
-      - name: hdd-manager-api-tcp
-        port: ${{HDD_MANAGER_API_PORT}}
-        protocol: TCP
-        targetPort: ${{HDD_MANAGER_API_PORT}}
-    selector:
-      deploymentconfig: hdd-manager-api
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
     labels:
-      service: hdd-manager-api
-      app: hdd-supervisor
-    name: hdd-manager-api
-    namespace: hdd-supervisor
+      app: ${APP_NAME}
+    name: ${APP_NAME}
   spec:
     replicas: 1
     selector:
-      service: hdd-manager-api
+      app: ${APP_NAME}
+      deploymentconfig: ${APP_NAME}
     template:
       metadata:
         labels:
-          app: hdd-supervisor
-          service: hdd-manager-api
+          app: ${APP_NAME}
+          deploymentconfig: ${APP_NAME}
       spec:
         containers:
           - image: >-
-              registry.devshift.net/fabric8-hdd/openshift-hdd-manager-api:${IMAGE_TAG}
+              registry.devshift.net/fabric8-hdd/${IMAGE_NAME}:${IMAGE_TAG}
             imagePullPolicy: Always
-            name: hdd-manager-api
+            name: ${APP_NAME}
             env:
             - name: HDD_MANAGER_API_PORT
               value: ${HDD_MANAGER_API_PORT}
+            - name: ROUTE_PATH
+              value: ${ROUTE_PATH}
             ports:
             - containerPort: ${{HDD_MANAGER_API_PORT}}
               protocol: TCP
             readinessProbe:
               httpGet:
-                path: /api/v1.0/readiness
+                path: /manager/api/v1.0/readiness
                 port: ${{HDD_MANAGER_API_PORT}}
                 scheme: HTTP
               initialDelaySeconds: 30
@@ -61,7 +47,7 @@ objects:
               timeoutSeconds: 10
             livenessProbe:
               httpGet:
-                path: /api/v1.0/liveness
+                path: /manager/api/v1.0/liveness
                 port: ${{HDD_MANAGER_API_PORT}}
                 scheme: HTTP
               initialDelaySeconds: 30
@@ -76,15 +62,46 @@ objects:
                 cpu: "1000m"
             securityContext:
               privileged: false
-        dnsPolicy: ClusterFirst
-    triggers:
-      - type: ConfigChange
+      triggers:
+        - type: ConfigChange
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: ${APP_NAME}
+    name: ${APP_NAME}
+  spec:
+    ports:
+      - name: ${APP_NAME}
+        port: ${{HDD_MANAGER_API_PORT}}
+        protocol: TCP
+        targetPort: ${{HDD_MANAGER_API_PORT}}
+    selector:
+      deploymentconfig: ${APP_NAME}
+- apiVersion: v1
+  kind: Route
+  metadata:
+    labels:
+      app: ${APP_NAME}
+      template: ${APP_NAME}
+    name: ${APP_NAME}
+  spec:
+    path: /manager
+    port:
+      targetPort: ${APP_NAME}
+    to:
+      kind: Service
+      name: ${APP_NAME}
 
 parameters:
 - name: HDD_MANAGER_API_PORT
   description: Port number that manager-api service will be exposed on.
   required: true
-  value: "9090"
+  value: "8888"
+- name: HDD_MANAGER_SERVICE_TARGET_PORT
+  description: Port number that manager-api service will map to.
+  required: true
+  value: "8888"
 - name: HDD_MANAGER_API_HOSTNAME
   description: Parameterised hostname route for the manager-api service.
   required: false
@@ -93,3 +110,18 @@ parameters:
   required: true
   name: IMAGE_TAG
   value: "latest"
+- description: Name of the app
+  displayName: Name of the app
+  required: true
+  name: APP_NAME
+  value: "osio-hdd-manager-api"
+- description: Image name
+  displayName: Image name
+  required: true
+  name: IMAGE_NAME
+  value: "openshift-hdd-manager-api"
+- description: Route path
+  displayName: Route path
+  required: true
+  name: ROUTE_PATH
+  value: "/manager"
