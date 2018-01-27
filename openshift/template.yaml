@@ -34,6 +34,8 @@ objects:
               value: ${HDD_MANAGER_API_PORT}
             - name: ROUTE_PATH
               value: ${ROUTE_PATH}
+            - name: ROUTE_PREFIX
+              value: ${ROUTE_PREFIX}
             ports:
             - containerPort: ${{HDD_MANAGER_API_PORT}}
               protocol: TCP
@@ -125,3 +127,8 @@ parameters:
   required: true
   name: ROUTE_PATH
   value: "/manager"
+- description: Route prefix
+  displayName: Route prefix
+  required: true
+  name: ROUTE_PREFIX
+  value: "/api/v1.0"
