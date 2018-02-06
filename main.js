@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }))
 var port = process.env.APP_PORT || 9090,
 	ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || "0.0.0.0"
 
-var routes = require("./node_modules/manager-api/src/api/routes.js")(app, process.env.ROUTE_PATH + process.env.ROUTE_PREFIX)
+var routes = require("./node_modules/fabric8-hypothesis-manager-api/src/api/routes.js")(app, process.env.ROUTE_PATH + process.env.ROUTE_PREFIX)
 
 //Setting up server
 var server = app.listen(port, function () {

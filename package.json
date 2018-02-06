@@ -1,5 +1,5 @@
 {
-  "name": "manager-api-image",
+  "name": "fabric8-hypothesis-manager-api-image",
   "version": "1.0.0",
   "description": "Instantiation of manager-api along with its respective build and deploy scripts reside here",
   "main": "main.js",
@@ -10,19 +10,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anmolbabu/manager-api-image.git"
+    "url": "git+https://github.com/fabric8-hdd/fabric8-hypothesis-manager-api-image.git"
   },
   "keywords": [],
   "author": "Anmol Babu <anmolbudugutta@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/anmolbabu/manager-api-image/issues"
+    "url": "https://github.com/fabric8-hdd/fabric8-hypothesis-manager-api-image/issues"
   },
-  "homepage": "https://github.com/anmolbabu/manager-api-image#readme",
+  "homepage": "https://github.com/fabric8-hdd/fabric8-hypothesis-manager-api-image#readme",
   "dependencies": {
     "express": "^4.16.2",
-    "hypothesis-core-image": "github:fabric8-hdd/hypothesis-core-image",
-    "manager-api": "github:fabric8-hdd/manager-api"
+    "hypothesis-core-image": "github:fabric8-hdd/fabric8-hypothesis-core-image",
+    "manager-api": "github:fabric8-hdd/fabric8-hypothesis-manager-api"
   },
   "devDependencies": {
     "chai": "^4.1.2",

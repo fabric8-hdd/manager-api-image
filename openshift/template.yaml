@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Template
 labels:
-  template: osio-hdd-manager-api
+  template: osio-hypothesis-manager-api
 metadata:
-  name: osio-hdd-manager-api
+  name: osio-hypothesis-manager-api
   annotations:
     description: ${APP_NAME}
 objects:
@@ -116,12 +116,12 @@ parameters:
   displayName: Name of the app
   required: true
   name: APP_NAME
-  value: "osio-hdd-manager-api"
+  value: "osio-hypothesis-manager-api"
 - description: Image name
   displayName: Image name
   required: true
   name: IMAGE_NAME
-  value: "openshift-hdd-manager-api"
+  value: "osio-hypothesis-manager-api"
 - description: Route path
   displayName: Route path
   required: true
