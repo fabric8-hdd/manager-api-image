@@ -21,7 +21,7 @@
   "homepage": "https://github.com/fabric8-hdd/fabric8-hypothesis-manager-api-image#readme",
   "dependencies": {
     "express": "^4.16.2",
-    "hypothesis-core-image": "github:fabric8-hdd/fabric8-hypothesis-core-image",
+    "fabric8-hypothesis-core-image": "github:fabric8-hdd/fabric8-hypothesis-core-image",
     "manager-api": "github:fabric8-hdd/fabric8-hypothesis-manager-api"
   },
   "devDependencies": {
