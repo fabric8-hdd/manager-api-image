@@ -5,6 +5,8 @@ set -ex
 . app_constants.sh
 
 curl -O ${env_script_location}
+mkdir -p cico_utils/prerequisites/
+curl -o cico_utils/prerequisites/${BUILD_MACHINE_OS}.sh ${os_prep_script_location}
 . setup_env.sh
 setup_env
 
