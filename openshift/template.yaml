@@ -26,23 +26,23 @@ objects:
       spec:
         containers:
           - image: >-
-              registry.devshift.net/fabric8-hdd/${IMAGE_NAME}:${IMAGE_TAG}
+              registry.devshift.net/fabric8-hypothesis/${IMAGE_NAME}:${IMAGE_TAG}
             imagePullPolicy: Always
             name: ${APP_NAME}
             env:
-            - name: HDD_MANAGER_API_PORT
-              value: ${HDD_MANAGER_API_PORT}
+            - name: HYPOTHESIS_MANAGER_API_PORT
+              value: ${HYPOTHESIS_MANAGER_API_PORT}
             - name: ROUTE_PATH
               value: ${ROUTE_PATH}
             - name: ROUTE_PREFIX
               value: ${ROUTE_PREFIX}
             ports:
-            - containerPort: ${{HDD_MANAGER_API_PORT}}
+            - containerPort: ${{HYPOTHESIS_MANAGER_API_PORT}}
               protocol: TCP
             readinessProbe:
               httpGet:
                 path: /manager/api/v1.0/readiness
-                port: ${{HDD_MANAGER_API_PORT}}
+                port: ${{HYPOTHESIS_MANAGER_API_PORT}}
                 scheme: HTTP
               initialDelaySeconds: 30
               periodSeconds: 60
@@ -50,7 +50,7 @@ objects:
             livenessProbe:
               httpGet:
                 path: /manager/api/v1.0/liveness
-                port: ${{HDD_MANAGER_API_PORT}}
+                port: ${{HYPOTHESIS_MANAGER_API_PORT}}
                 scheme: HTTP
               initialDelaySeconds: 30
               periodSeconds: 60
@@ -75,9 +75,9 @@ objects:
   spec:
     ports:
       - name: ${APP_NAME}
-        port: ${{HDD_MANAGER_API_PORT}}
+        port: ${{HYPOTHESIS_MANAGER_API_PORT}}
         protocol: TCP
-        targetPort: ${{HDD_MANAGER_API_PORT}}
+        targetPort: ${{HYPOTHESIS_MANAGER_API_PORT}}
     selector:
       deploymentconfig: ${APP_NAME}
 - apiVersion: v1
@@ -96,15 +96,15 @@ objects:
       name: ${APP_NAME}
 
 parameters:
-- name: HDD_MANAGER_API_PORT
+- name: HYPOTHESIS_MANAGER_API_PORT
   description: Port number that manager-api service will be exposed on.
   required: true
   value: "8888"
-- name: HDD_MANAGER_SERVICE_TARGET_PORT
+- name: HYPOTHESIS_MANAGER_SERVICE_TARGET_PORT
   description: Port number that manager-api service will map to.
   required: true
   value: "8888"
-- name: HDD_MANAGER_API_HOSTNAME
+- name: HYPOTHESIS_MANAGER_API_HOSTNAME
   description: Parameterised hostname route for the manager-api service.
   required: false
 - description: Image tag

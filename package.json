@@ -10,19 +10,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fabric8-hdd/fabric8-hypothesis-manager-api-image.git"
+    "url": "git+https://github.com/fabric8-hypothesis/fabric8-hypothesis-manager-api-image.git"
   },
   "keywords": [],
   "author": "Anmol Babu <anmolbudugutta@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fabric8-hdd/fabric8-hypothesis-manager-api-image/issues"
+    "url": "https://github.com/fabric8-hypothesis/fabric8-hypothesis-manager-api-image/issues"
   },
-  "homepage": "https://github.com/fabric8-hdd/fabric8-hypothesis-manager-api-image#readme",
+  "homepage": "https://github.com/fabric8-hypothesis/fabric8-hypothesis-manager-api-image#readme",
   "dependencies": {
     "express": "^4.16.2",
-    "fabric8-hypothesis-core-image": "github:fabric8-hdd/fabric8-hypothesis-core-image",
-    "manager-api": "github:fabric8-hdd/fabric8-hypothesis-manager-api"
+    "fabric8-hypothesis-core-image": "github:fabric8-hypothesis/fabric8-hypothesis-core-image",
+    "manager-api": "github:fabric8-hypothesis/fabric8-hypothesis-manager-api"
   },
   "devDependencies": {
     "chai": "^4.1.2",
