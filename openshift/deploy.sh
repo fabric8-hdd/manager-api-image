@@ -20,7 +20,7 @@ template="${here}/template.yaml"
 envfile="${here}/supervisor.env"
 
 
-if [ -z $(grep "HDD_MANAGER_API_PORT" $envfile | cut -d'=' -f 2) ];
+if [ -z $(grep "HYPOTHESIS_MANAGER_API_PORT" $envfile | cut -d'=' -f 2) ];
 then
   echo "PORT parameter will be default"
   oc_process_apply "$template"
